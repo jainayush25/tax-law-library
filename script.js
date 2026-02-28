@@ -8,24 +8,37 @@ fetch("data.json")
       let value = this.value.trim();
       let output = "";
 
-      data.forEach(item => {
+      data.forEach((item, index) => {
         if (item.section.includes(value)) {
+          const caseId = `cases-${index}`;
+
           output += `
             <h4>Section ${item.section} – ${item.title}</h4>
             <p>${item.text}</p>
           `;
 
           if (item.cases && item.cases.length > 0) {
-            output += `<h5>Case Laws:</h5><ul>`;
+            output += `
+              <button onclick="toggleCases('${caseId}')">
+                Show / Hide Case Laws
+              </button>
+              <div id="${caseId}" style="display:none; margin-top:8px;">
+                <ul>
+            `;
+
             item.cases.forEach(c => {
               output += `
-                <li>
+                <li style="margin-bottom:8px;">
                   <strong>${c.name}</strong> (${c.court}, ${c.year})<br>
                   <em>${c.relevant_para}</em>
                 </li>
               `;
             });
-            output += `</ul>`;
+
+            output += `
+                </ul>
+              </div>
+            `;
           }
 
           output += `<hr>`;
@@ -35,3 +48,12 @@ fetch("data.json")
       resultDiv.innerHTML = output;
     });
   });
+
+function toggleCases(id) {
+  const el = document.getElementById(id);
+  if (el.style.display === "none") {
+    el.style.display = "block";
+  } else {
+    el.style.display = "none";
+  }
+}
