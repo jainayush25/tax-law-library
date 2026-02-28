@@ -6,54 +6,52 @@ fetch("data.json")
 
     searchBox.addEventListener("input", function () {
       let value = this.value.trim();
-      let output = "";
+      resultDiv.innerHTML = "";
 
       data.forEach((item, index) => {
         if (item.section.includes(value)) {
-          const caseId = `cases-${index}`;
 
-          output += `
+          const sectionDiv = document.createElement("div");
+
+          sectionDiv.innerHTML = `
             <h4>Section ${item.section} – ${item.title}</h4>
             <p>${item.text}</p>
           `;
 
           if (item.cases && item.cases.length > 0) {
-            output += `
-              <button onclick="toggleCases('${caseId}')">
-                Show / Hide Case Laws
-              </button>
-              <div id="${caseId}" style="display:none; margin-top:8px;">
-                <ul>
-            `;
+            const btn = document.createElement("button");
+            btn.textContent = "Show / Hide Case Laws";
+            btn.style.marginBottom = "6px";
+
+            const caseDiv = document.createElement("div");
+            caseDiv.style.display = "none";
+
+            const ul = document.createElement("ul");
 
             item.cases.forEach(c => {
-              output += `
-                <li style="margin-bottom:8px;">
-                  <strong>${c.name}</strong> (${c.court}, ${c.year})<br>
-                  <em>${c.relevant_para}</em>
-                </li>
+              const li = document.createElement("li");
+              li.style.marginBottom = "8px";
+              li.innerHTML = `
+                <strong>${c.name}</strong> (${c.court}, ${c.year})<br>
+                <em>${c.relevant_para}</em>
               `;
+              ul.appendChild(li);
             });
 
-            output += `
-                </ul>
-              </div>
-            `;
+            caseDiv.appendChild(ul);
+
+            btn.addEventListener("click", () => {
+              caseDiv.style.display =
+                caseDiv.style.display === "none" ? "block" : "none";
+            });
+
+            sectionDiv.appendChild(btn);
+            sectionDiv.appendChild(caseDiv);
           }
 
-          output += `<hr>`;
+          sectionDiv.appendChild(document.createElement("hr"));
+          resultDiv.appendChild(sectionDiv);
         }
       });
-
-      resultDiv.innerHTML = output;
     });
   });
-
-function toggleCases(id) {
-  const el = document.getElementById(id);
-  if (el.style.display === "none") {
-    el.style.display = "block";
-  } else {
-    el.style.display = "none";
-  }
-}
