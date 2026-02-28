@@ -2,11 +2,33 @@
   {
     "section": "68",
     "title": "Cash Credits",
-    "text": "Where any sum is found credited in the books of an assessee..."
+    "text": "Where any sum is found credited in the books of an assessee...",
+    "cases": [
+      {
+        "name": "CIT vs Orissa Corporation Pvt Ltd",
+        "court": "Supreme Court",
+        "year": "1986",
+        "relevant_para": "The assessee having furnished the names and addresses of the alleged creditors, the burden shifted to the department..."
+      },
+      {
+        "name": "PCIT vs NRA Iron & Steel Pvt Ltd",
+        "court": "Supreme Court",
+        "year": "2019",
+        "relevant_para": "The assessee is under a legal obligation to prove the genuineness of the transaction..."
+      }
+    ]
   },
   {
     "section": "147",
     "title": "Income Escaping Assessment",
-    "text": "If the Assessing Officer has reason to believe..."
+    "text": "If the Assessing Officer has reason to believe...",
+    "cases": [
+      {
+        "name": "CIT vs Kelvinator of India Ltd",
+        "court": "Supreme Court",
+        "year": "2010",
+        "relevant_para": "Change of opinion cannot be a reason to reopen assessment..."
+      }
+    ]
   }
 ]
